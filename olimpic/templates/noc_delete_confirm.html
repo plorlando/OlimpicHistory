@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Apagar {{ noc.region }}?</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Apagar">
+        <a href="{% url 'olimpic:noc_update' noc.noc %}">Cancelar</a>
+    </form>
+{% endblock %}

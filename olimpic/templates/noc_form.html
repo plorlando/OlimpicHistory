@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block main %}
+<div class="container">
+    {% if not form.instance.noc %}
+        <h3>Novo NOC</h3>
+    {% else %}
+        <h3>Atualizar NOC</h3>
+    {% endif %}
+
+    {% crispy form %}
+    <a type="button" href="{% url 'olimpic:noc_delete' pk=noc_infos.pk %}">Apagar Noc</a>
+</div>
+
+{% endblock %}
