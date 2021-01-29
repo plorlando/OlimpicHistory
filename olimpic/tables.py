@@ -10,7 +10,8 @@ class NocTable(tables.Table):
         
 
 class AthletesTable(tables.Table):
-    # editar = tables.TemplateColumn('''<a type="button" class="btn-primary btn-sm" href="{% url 'anviva:extrato_atualiza' record.id %}">Editar</a>''')
+    editar = tables.TemplateColumn('''<a type="button" class="btn-primary btn-sm" href="{% url 'olimpic:athlete_update' record.id %}">Editar</a>''')
     
     class Meta:
         model = Athlete_events
+        fields = ('editar', 'name',  'team', 'noc', 'games', 'year', 'season', 'city', 'sport', 'event', 'medal')

@@ -12,7 +12,7 @@
         <form action="" class="form" method="get">
             {% bootstrap_form filter.form layout='inline' %}
             {% bootstrap_button 'Filtrar' %}
-            <a class="btn btn-outline-secondary" href="{% url 'olimpic:athlete' %}" role="button">Limpar Pesquisa</a>
+            <a class="btn btn-outline-secondary" href="{% url 'olimpic:athlete_list' %}" role="button">Limpar Pesquisa</a>
         </form>
         {% endif %}
 

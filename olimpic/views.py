@@ -27,20 +27,6 @@ class NOCList(SingleTableMixin, FilterView):
         return super(NOCList, self).dispatch(*args, **kwargs)
 
 
-class AthleteList(SingleTableMixin, FilterView):
-    model = Athlete_events
-    table_class = AthletesTable
-    template_name = 'athletes.html'
-    filterset_class = AthletesFilter
-    paginate_by = 100
-
-    def get_queryset(self):
-        return Athlete_events.objects.all().order_by('name')
-
-    def dispatch(self, *args, **kwargs):
-        return super(AthleteList, self).dispatch(*args, **kwargs)
-
-
 def NOCUpdate(request, pk):
     template = 'noc_form.html'
     registro = get_object_or_404(Noc, noc=pk)
@@ -71,3 +57,50 @@ class NocDeleteView(DeleteView):
 
     def dispatch(self, *args, **kwargs):
         return super(NocDeleteView, self).dispatch(*args, **kwargs)
+
+
+
+class AthleteList(SingleTableMixin, FilterView):
+    model = Athlete_events
+    table_class = AthletesTable
+    template_name = 'athletes.html'
+    filterset_class = AthletesFilter
+    paginate_by = 100
+
+    def get_queryset(self):
+        return Athlete_events.objects.all().order_by('name')
+
+    def dispatch(self, *args, **kwargs):
+        return super(AthleteList, self).dispatch(*args, **kwargs)
+
+
+def AthleteUpdate(request, pk):
+    template = 'athlete_form.html'
+    registro = get_object_or_404(Athlete_events, id=pk)
+    print(registro)
+    form = AthleteForm(request.POST or None, instance=registro)
+    athlete_record = Athlete_events.objects.get(id=pk)
+
+    if form.is_valid():
+        form.save()
+        return redirect('olimpic:athlete_list')
+
+    return render(request, template, {"form": form, "athlete_infos": athlete_record})
+
+class AthleteNewView(CreateView):
+    model = Athlete_events
+    form_class = AthleteForm
+    success_url = reverse_lazy('olimpic:athlete_list')
+    template_name = 'athlete_new.html'
+
+    def dispatch(self, *args, **kwargs):
+        return super(AthleteNewView, self).dispatch(*args, **kwargs)
+
+
+class AthleteDeleteView(DeleteView):
+    model = Athlete_events
+    success_url = reverse_lazy('olimpic:athlete_list')
+    template_name = 'athlete_delete_confirm.html'
+
+    def dispatch(self, *args, **kwargs):
+        return super(AthleteDeleteView, self).dispatch(*args, **kwargs)
