@@ -6,8 +6,6 @@ django-crispy-forms==1.10.0
 django-filter==2.4.0
 django-tables2==2.3.4
 importlib-metadata==2.1.1
-numpy==1.19.5
-pandas==1.2.1
 psycopg2==2.8.6
 python-dateutil==2.8.1
 pytz==2020.5
