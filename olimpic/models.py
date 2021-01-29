@@ -7,6 +7,17 @@ class Noc(models.Model):
     notes = models.CharField(max_length=100, blank=True, null=True)
 
 
+class Atheletes(models.Model):
+    id_athlete = models.IntegerField()
+    name = models.CharField(max_length=100)
+    sex = models.CharField(max_length=1)
+    age = models.PositiveIntegerField()
+    height = models.CharField(max_length=20)
+    weight = models.CharField(max_length=20)
+    team = models.CharField(max_length=50)
+    noc = models.ForeignKey(Noc, max_length=3, verbose_name='NOC', on_delete=models.CASCADE)
+
+
 class Athlete_events(models.Model):
     id_athlete = models.IntegerField()
     name = models.CharField(max_length=100)
